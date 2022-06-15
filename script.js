@@ -1,253 +1,148 @@
-"use strict";
-
-/* (Day 2) Modern JavaScript: Accessors in object literals
-
->
-const user = {
-  userName: 'Amir'
-};
-user.userName;
-RESULT:
-'Amir'
+// Day 3 ------------------- Modern JavaScript: Basic array destructuring -------------------
+/* 
 
 >
-const user = {
-  get userName() { return 'Amir'; }
-};
-user.userName;
+const letters = ['a', 'b', 'c', 'd'];
+const a = letters[0], b = letters[1], c = letters[2];
+[a, b, c];
 RESULT:
-'Amir'
+['a', 'b', 'c']
 
 >
-const user = {
-  get userName() { return 'Be' + 'tty'; }
-};
-user.userName;
+const letters = ['a', 'b', 'c', 'd'];
+const [a, b, c] = letters;
+[a, b, c];
 RESULT:
-'Betty'
+['a', 'b', 'c']
 
-let userName = 'Amir';
-const user = {
-  get userName() { return userName; }
-};
-const name1 = user.userName;
-userName = 'Betty';
-const name2 = user.userName;
-[name1, name2];
+const names = ['Amir', 'Betty', 'Cindy', 'Dalili'];
+const firstUser = names[0];
+const secondUser = names[1];
+​
+const users = [firstUser, secondUser];
+users;
 GOAL:
 ['Amir', 'Betty']
 YOURS:
 ['Amir', 'Betty']
 
 >
-const user = {userName: 'Amir'};
-user.userName = 'Betty';
-user.userName;
+const letters = ['a', 'b', 'c', 'd'];
+let [a, b, c] = letters;
+[a, b, c];
 RESULT:
-'Betty'
+['a', 'b', 'c']
 
 >
-const user = {
-  realName: 'Amir',
-  set userName(newName) { this.realName = newName; }
-};
-user.userName = 'Betty';
-user.realName;
+const letters = ['a', 'b', 'c', 'd'];
+var [a, b, c] = letters;
+[a, b, c];
 RESULT:
-'Betty'
+['a', 'b', 'c']
 
 >
-const user = {
-  realName: 'Amir',
-  set userName(newName) { this.realName = newName; }
-};
-user.userName;
+const letters = ['a', 'b', 'c', 'd'];
+const [a, , c] = letters;
+[a, c];
 RESULT:
-undefined
+['a', 'c']
 
 >
-const user = {
-  realName: 'Amir',
-  get userName() { return this.realName; },
-  set userName(newName) { this.realName = newName; },
-};
-user.userName = 'Betty';
-[user.realName, user.userName];
+const [a, b, c] = null;
 RESULT:
-['Betty', 'Betty']
+TypeError: null is not iterable
 
-const user = {
-  names: ['Amir'],
-  set userName(newName) {
-    this.names.push(newName);
-  }
-};
-user.userName = 'Betty';
-user.names;
+>
+const [a, b, c] = 5;
+RESULT:
+TypeError: 5 is not iterable
+
+>
+const letters = ['a', 'b', 'c'];
+const [a, b, c, d] = letters;
+[c, d];
+RESULT:
+['c', undefined]
+
+>
+const letters = ['a', 'b', 'c'];
+const [a, b, c, d='dee'] = letters;
+[c, d];
+RESULT:
+['c', 'dee']
+
+>
+const letters = ['a', 'b', 'c', 'd'];
+const [a, b, c, d='dee'] = letters;
+[c, d];
+RESULT:
+['c', 'd']
+
+>
+const letters = ['a', 'b', 'c'];
+const [a, b, c, d='dee', e] = letters;
+[d, e];
+RESULT:
+['dee', undefined]
+
+>
+const letters = ['a', 'b', 'c'];
+const [a, ...others] = letters;
+others;
+RESULT:
+['b', 'c']
+
+>
+const letters = ['a', 'b', 'c'];
+const [a, b, ...others] = letters;
+others;
+RESULT:
+['c']
+
+const names = ['Amir', 'Betty', 'Cindy', 'Dalili'];
+...
+const firstUser = names[0];
+const secondUser = names[1];
+const [a, b, ...otherUsers] = names;
+​
+const users = [firstUser, secondUser, otherUsers];
+users;
 GOAL:
-['Amir', 'Betty']
+['Amir', 'Betty', ['Cindy', 'Dalili']]
 YOURS:
-['Amir', 'Betty']
+['Amir', 'Betty', ['Cindy', 'Dalili']]
 
 >
-function createUser(userName) {
-  return {
-    names: [userName],
-    get userName() { return this.names[this.names.length - 1]; },
-    set userName(userName) { this.names.push(userName); }
-  };
-}
-
-const user = createUser('Amir');
-user.userName = 'Betty';
-user.names;
+const letters = ['a', 'b', 'c']
+const [...others, a] = letters
+others
 RESULT:
-['Amir', 'Betty']
+SyntaxError: on line 2: Rest element must be last element.
 
 >
-const user = {
-  userName: function () { return 'Amir'; }
-};
-typeof user.userName;
+const letters = 'abc';
+const [a, b, c] = letters;
+b;
 RESULT:
-'function'
-
-*/
-
-/* (DAY 1)
---- Modern JavaScript: Accessors in object literals ---
+'b'
 
 >
-const user = {
-  userName: 'Amir'
-};
-user.userName;
+const s = 'this is a long string';
+const [...chars] = s;
+chars[2];
 RESULT:
-'Amir'
+'i'
 
-// ----------------- 1. ----------------- //
+/* 
 
-  >
-const user = {
-  get userName() { return 'Amir'; }
-};
-user.userName;
-RESULT:
-'Amir'
+/* 
 
-// ----------------- 2. ----------------- //
+// Day 2 -------------------------
 
->
-const user = {
-  get userName() { return 'Be' + 'tty'; }
-};
-user.userName;
-RESULT:
-'Betty'
+...
 
-// ----------------- 3. ----------------- //
+// Day 1 -------------------------
 
-let userName = 'Amir';
-const user = {
-  get userName() {
-    return userName;
-  }
-  
-}
-const name1 = user.userName;
-userName = 'Betty';
-const name2 = user.userName;
-[name1, name2];
-GOAL:
-['Amir', 'Betty']
-YOURS:
-['Amir', 'Betty']
-
-
-// ----------------- 4. ----------------- //
-
->
-const user = {userName: 'Amir'};
-user.userName = 'Betty';
-user.userName;
-RESULT:
-'Betty'
-
-// ----------------- 5. ----------------- //
-
->
-const user = {
-  realName: 'Amir',
-  set userName(newName) { this.realName = newName; }
-};
-user.userName = 'Betty';
-user.realName;
-RESULT:
-'Betty'
-
-// ----------------- 6. ----------------- //
-
->
-const user = {
-  realName: 'Amir',
-  set userName(newName) { this.realName = newName; }
-};
-user.userName;
-RESULT:
-undefined
-
-// ----------------- 7. ----------------- //
-
->
-const user = {
-  realName: 'Amir',
-  get userName() { return this.realName; },
-  set userName(newName) { this.realName = newName; },
-};
-user.userName = 'Betty';
-[user.realName, user.userName];
-RESULT:
-['Betty', 'Betty']
-
-// ----------------- 8. ----------------- //
-
-const user = {
-  names: ['Amir'],
-  set userName(a) { return user.names.push(a) }
-}
-  
-user.userName = 'Betty';
-user.names;
-GOAL:
-['Amir', 'Betty']
-YOURS:
-['Amir', 'Betty']
-
-// ----------------- 9. ----------------- //
-
->
-function createUser(userName) {
-  return {
-    names: [userName],
-    get userName() { return this.names[this.names.length - 1]; },
-    set userName(userName) { this.names.push(userName); }
-  };
-}
-
-const user = createUser('Amir');
-user.userName = 'Betty';
-user.names;
-RESULT:
-['Amir', 'Betty']
-
-// ----------------- 10. ----------------- //
-
->
-const user = {
-  userName: function () { return 'Amir'; }
-};
-typeof user.userName;
-RESULT:
-'function'
+...
 
 */
