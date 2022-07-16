@@ -2,7 +2,50 @@
 /// Day 2 /// -----------------------------------------
 //---------//
 
+/*
 
+--- Computed Properties ---
+
+1. ---
+const loginCounts = {Amir: 5};
+loginCounts.Amir;
+RESULT:
+5
+
+2. ---
+const name = 'Amir';
+const loginCounts = {[name]: 5};
+loginCounts.Amir;
+RESULT:
+5
+
+3. ---
+const loginCounts = {
+  ['Be' + 'tty']: 7,
+};
+loginCounts.Betty;
+RESULT:
+7
+
+4. ---
+const users = [
+  {name: 'Amir', loginCount: 5},
+  {name: 'Betty', loginCount: 16},
+];
+function loginCount(user) {
+ let result = {[user.name]: user.loginCount}
+ return result;
+}
+[
+  loginCount(users[0]),
+  loginCount(users[1]),
+];
+GOAL:
+[{Amir: 5}, {Betty: 16}]
+YOURS:
+[{Amir: 5}, {Betty: 16}]
+
+*/
 
 //---------//
 /// Day 1 /// -----------------------------------------
